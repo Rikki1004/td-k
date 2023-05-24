@@ -102,7 +102,27 @@ public final class Client implements Runnable {
         }
         return NativeClient.clientExecute(query);
     }
+    
+    
+    
+    
+    public void setUpdatesHandler(ResultHandler updatesHandler, ExceptionHandler exceptionHandler) {
+        handlers.put(0L, new Handler(updatesHandler, exceptionHandler));
+    }
 
+    /**
+     * Replaces handler for incoming updates from the TDLib. Sets empty ExceptionHandler.
+     *
+     * @param updatesHandler Handler with onResult method which will be called for every incoming
+     *                       update from the TDLib.
+     */
+    public void setUpdatesHandler(ResultHandler updatesHandler) {
+        setUpdatesHandler(updatesHandler, null);
+    }
+    
+    
+    
+    
     /**
      * Overridden method from Runnable, do not call it directly.
      */
